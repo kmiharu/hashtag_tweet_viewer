@@ -1,0 +1,14 @@
+body {
+  background-color: #00FF00;
+}
+
+.Card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  margin: 0 auto;
+  max-height: 200px;
+  min-height: 200px;
+  max-width: 70%;
+}
