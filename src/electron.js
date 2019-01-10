@@ -41,7 +41,7 @@ function createWindow() {
   //mainWindow.loadURL('http://localhost:3000');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // listen hashtag text from renderer process.
   // とりあえず createWindow() の中に書いてるけどこれでよいのだろうか。
