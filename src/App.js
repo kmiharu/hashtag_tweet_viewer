@@ -54,12 +54,23 @@ class App extends Component {
     this.handleMaxLengthChange = this.handleMaxLengthChange.bind(this);
     this.handleExecCheck = this.handleExecCheck.bind(this);
 
+    // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
       this.setState({ screen_name: arg });
       this.setState({ fadeflag: true });
     });
+
+    // render tweet
     ipcRenderer.on('Text', (event, arg) => {
-      this.setState({ text: arg });
+      let value = '';
+      // tweet length > set max length 
+      if(arg.length > parseInt(this.state.max_length)) {
+        value = arg.substring(0, this.state.max_length) + '.....';
+      } else {
+        value = arg;
+      }
+
+      this.setState({ text: value });
       this.setState({ fadeflag: true });
     });
   };
