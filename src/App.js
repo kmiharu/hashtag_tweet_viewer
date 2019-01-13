@@ -44,28 +44,31 @@ class App extends Component {
       hashtag: '',
       screen_name: '',
       text: '',
+      max_length: 240,
       fadeflag: false,
       execflag: false,
       twitterlogocolor: '#666666',
     };
 
     this.handleHashtagChange = this.handleHashtagChange.bind(this);
+    this.handleMaxLengthChange = this.handleMaxLengthChange.bind(this);
     this.handleExecCheck = this.handleExecCheck.bind(this);
 
     ipcRenderer.on('ScreenName', (event, arg) => {
-      //handleUpdateScreenName(arg);
       this.setState({ screen_name: arg });
       this.setState({ fadeflag: true });
     });
     ipcRenderer.on('Text', (event, arg) => {
-      //handleUpdateText(arg);
       this.setState({ text: arg });
       this.setState({ fadeflag: true });
     });
-  }
+  };
 
   handleHashtagChange(event) {
     this.setState({ hashtag: event.target.value });
+  };
+  handleMaxLengthChange(event) {
+    this.setState({ max_length: event.target.value });
   };
 
   handleExecCheck(event) {
@@ -88,14 +91,35 @@ class App extends Component {
   render() {
     return(
       <div>
-        <input
-          onChange={this.handleHashtagChange}
-        />
-        <button
-          onClick={this.handleExecCheck}
-        >
-          start/stop
-        </button>
+        {/* config view */}
+        <div>
+          <ul>
+            <li>
+              <label className="config-label">
+                Hashtag:
+              </label>
+              <input
+                onChange={this.handleHashtagChange}
+              />
+              <button
+                onClick={this.handleExecCheck}
+              >
+                start/stop
+              </button>
+            </li>
+            <li>
+              <label className="config-label">
+                Max length:
+              </label>
+              <input
+                onChange={this.handleMaxLengthChange}
+              />
+              <label>
+                current value : {this.state.max_length}
+              </label>
+            </li>
+          </ul>
+        </div>
 
         <Card className="Card">
           <CardContent>

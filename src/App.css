@@ -12,3 +12,13 @@ body {
   min-height: 200px;
   max-width: 70%;
 }
+
+/* config view */
+ul li {
+  list-style: none;
+}
+.config-label {
+  margin-right: 10px;
+  width: 100px;
+  float: left;
+}
