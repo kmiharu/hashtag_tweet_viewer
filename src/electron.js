@@ -45,7 +45,11 @@ function createWindow() {
 
   // listen hashtag text from renderer process.
   ipcMain.on('Hashtag', (event, arg) => {
-    searchTweet(event, arg);
+    if(0 != arg.length){
+      searchTweet(event, arg);
+    } else {
+      event.sender.send('Text', 'Hashtag text is none.');
+    }
   });
 
   // Create Menu
