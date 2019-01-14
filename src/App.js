@@ -114,7 +114,7 @@ class App extends Component {
                 Hashtag:
               </label>
               <input
-                onChange={this.handleHashtagChange} 
+                onChange={this.handleHashtagChange} disabled={this.state.execflag}
               />
               <button
                 onClick={this.handleExecCheck}
@@ -127,7 +127,7 @@ class App extends Component {
                 Max length:
               </label>
               <input
-                onChange={this.handleMaxLengthChange}
+                onChange={this.handleMaxLengthChange} disabled={this.state.execflag}
               />
               <label>
                 current value : {this.state.max_length}
@@ -138,7 +138,7 @@ class App extends Component {
                 Interval time:
               </label>
               <input
-                onChange={this.handleIntervalTime}
+                onChange={this.handleIntervalTime} disabled={this.state.execflag}
               />
               <label>
                 current value : {this.state.interval_time} millisecond
