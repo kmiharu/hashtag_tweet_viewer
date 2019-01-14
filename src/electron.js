@@ -44,7 +44,6 @@ function createWindow() {
   //mainWindow.webContents.openDevTools();
 
   // listen hashtag text from renderer process.
-  // とりあえず createWindow() の中に書いてるけどこれでよいのだろうか。
   ipcMain.on('Hashtag', (event, arg) => {
     searchTweet(event, arg);
   });

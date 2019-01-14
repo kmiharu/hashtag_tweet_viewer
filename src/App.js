@@ -6,7 +6,6 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
-// window はなんなんか後で調べる
 const { ipcRenderer } = window.require('electron');
 
 let timerNum;
@@ -45,6 +44,7 @@ class App extends Component {
       screen_name: '',
       text: '',
       max_length: 240,
+      interval_time: 5000,
       fadeflag: false,
       execflag: false,
       twitterlogocolor: '#666666',
@@ -53,6 +53,7 @@ class App extends Component {
     this.handleHashtagChange = this.handleHashtagChange.bind(this);
     this.handleMaxLengthChange = this.handleMaxLengthChange.bind(this);
     this.handleExecCheck = this.handleExecCheck.bind(this);
+    this.handleIntervalTime = this.handleIntervalTime.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -81,6 +82,9 @@ class App extends Component {
   handleMaxLengthChange(event) {
     this.setState({ max_length: event.target.value });
   };
+  handleIntervalTime(event) {
+    this.setState({ interval_time: event.target.value });
+  };
 
   handleExecCheck(event) {
     if(this.state.execflag) {
@@ -95,7 +99,7 @@ class App extends Component {
       timerNum = setInterval(() => {
         this.setState({ fadeflag: false });
         ipcRenderer.send('Hashtag', this.state.hashtag);
-      }, 5000);
+      }, this.state.interval_time);
     }
   };
 
@@ -110,7 +114,7 @@ class App extends Component {
                 Hashtag:
               </label>
               <input
-                onChange={this.handleHashtagChange}
+                onChange={this.handleHashtagChange} 
               />
               <button
                 onClick={this.handleExecCheck}
@@ -127,6 +131,17 @@ class App extends Component {
               />
               <label>
                 current value : {this.state.max_length}
+              </label>
+            </li>
+            <li>
+              <label className="config-label">
+                Interval time:
+              </label>
+              <input
+                onChange={this.handleIntervalTime}
+              />
+              <label>
+                current value : {this.state.interval_time} millisecond
               </label>
             </li>
           </ul>
