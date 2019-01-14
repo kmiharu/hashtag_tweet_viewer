@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
 import './App.css';
+//import sanitaize from './Sanitaize.js';
 
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -77,13 +78,22 @@ class App extends Component {
   };
 
   handleHashtagChange(event) {
+    //this.setState({ hashtag: sanitaize.encode(event.target.value) });
     this.setState({ hashtag: event.target.value });
   };
   handleMaxLengthChange(event) {
-    this.setState({ max_length: event.target.value });
+    if(event.target.value.match(/^[0-9\b]+$/)){
+      this.setState({ max_length: event.target.value });
+    } else {
+      this.setState({ max_length: 0 })
+    }
   };
   handleIntervalTime(event) {
-    this.setState({ interval_time: event.target.value });
+    if(event.target.value.match(/^[0-9\b]+$/)){
+      this.setState({ interval_time: event.target.value });
+    } else {
+      this.setState({ interval_time: 0 })
+    }
   };
 
   handleExecCheck(event) {
