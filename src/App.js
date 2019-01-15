@@ -160,7 +160,7 @@ class App extends Component {
         <Card className="Card">
           <CardContent>
             <Typography variant="h3">
-              <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35; {this.state.hashtag}
+              <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
             </Typography>
             <Typography variant="h4">
               <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
