@@ -69,15 +69,15 @@ function createMenu() {
 
   const menu = new Menu();
   menu.append(new MenuItem({
-    label: 'Commands',
+    label: 'Menu',
     submenu: [
-      {
-        label: 'Configuration',
-        accelerator: process.platform === 'darwin' ? 'Alt+Cmd+C' : 'Ctrl+Shift+C',
-        click: () => {
-          //mainWindow.webContents.send('ping', 'Config')
-        }
-      },
+      // {
+      //   label: 'Configuration',
+      //   accelerator: process.platform === 'darwin' ? 'Alt+Cmd+C' : 'Ctrl+Shift+C',
+      //   click: () => {
+      //     //mainWindow.webContents.send('ping', 'Config')
+      //   }
+      // },
       {
         label: 'Twitter Auth',
         accelerator: process.platform === 'darwin' ? 'Alt+Cmd+T' : 'Ctrl+Shift+T',
