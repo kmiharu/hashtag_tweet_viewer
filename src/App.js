@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
 import './App.css';
-//import sanitaize from './Sanitaize.js';
+//import sanitaize from './components/Sanitaize.js';
+import ClassNames from 'classnames';
 
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Button,TextField, Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
 const { ipcRenderer } = window.require('electron');
 
+// interval time id
 let timerNum;
 
 // Fade component
@@ -16,7 +18,7 @@ const duration = 300;
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
   opacity: 0,
-}
+};
 const transitionStyles = {
   entering: { opacity: 0 },
   entered:  { opacity: 1 },
@@ -97,11 +99,13 @@ class App extends Component {
   };
 
   handleExecCheck(event) {
+    // stop
     if(this.state.execflag) {
       this.setState({ execflag: false });
       this.setState({ twitterlogocolor: '#666666'})
 
       clearInterval(timerNum);
+    // start
     } else {
       this.setState({ execflag: true });
       this.setState({ twitterlogocolor: '#00aced' });
@@ -114,6 +118,12 @@ class App extends Component {
   };
 
   render() {
+    // start/stop button classNames
+    const run_button_class = ClassNames({
+      "running-button": this.state.execflag === true,
+      "to-run-button": this.state.execflag === false
+    });
+
     return(
       <div>
         {/* config view */}
@@ -127,6 +137,7 @@ class App extends Component {
                 onChange={this.handleHashtagChange} disabled={this.state.execflag}
               />
               <button
+                className={run_button_class}
                 onClick={this.handleExecCheck}
               >
                 start/stop

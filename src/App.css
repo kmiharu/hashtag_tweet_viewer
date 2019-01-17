@@ -22,3 +22,15 @@ ul li {
   width: 100px;
   float: left;
 }
+
+/* start/stop button css */
+.running-button {
+  background-color: #4caf50;
+  color: white;
+  content: "running / 実行中";
+}
+.to-run-button {
+  background-color: #008cba;
+  color: white;
+  content: "to run / 実行する";
+}
