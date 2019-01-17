@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Transition } from 'react-transition-group';
 import './App.css';
 import ClassNames from 'classnames';
+
+import Fade from './components/Fade.js';
 
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,29 +12,6 @@ const { ipcRenderer } = window.require('electron');
 
 // interval time id
 let timerNum;
-
-// Fade component
-const duration = 300;
-const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0,
-};
-const transitionStyles = {
-  entering: { opacity: 0 },
-  entered:  { opacity: 1 },
-};
-const Fade = ({ in: inProp, text: inText }) => (
-  <Transition in={inProp} timeout={duration}>
-    {(state) => (
-      <div style={{
-        ...defaultStyle,
-        ...transitionStyles[state]
-      }}>
-        {inText}
-      </div>
-    )}
-  </Transition>
-);
 
 // App class
 class App extends Component {
