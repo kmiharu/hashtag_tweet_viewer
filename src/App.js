@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
 import './App.css';
-//import sanitaize from './components/Sanitaize.js';
 import ClassNames from 'classnames';
 
-import { Button,TextField, Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
@@ -46,6 +45,7 @@ class App extends Component {
       hashtag: '',
       screen_name: '',
       text: '',
+      run_button_text: 'To run / 実行する',
       max_length: 240,
       interval_time: 5000,
       fadeflag: false,
@@ -102,13 +102,15 @@ class App extends Component {
     // stop
     if(this.state.execflag) {
       this.setState({ execflag: false });
-      this.setState({ twitterlogocolor: '#666666'})
+      this.setState({ twitterlogocolor: '#666666'});
+      this.setState({ run_button_text: 'To run / 実行する' });
 
       clearInterval(timerNum);
     // start
     } else {
       this.setState({ execflag: true });
       this.setState({ twitterlogocolor: '#00aced' });
+      this.setState({ run_button_text: 'Running / 実行中' });
 
       timerNum = setInterval(() => {
         this.setState({ fadeflag: false });
@@ -140,7 +142,7 @@ class App extends Component {
                 className={run_button_class}
                 onClick={this.handleExecCheck}
               >
-                start/stop
+                {this.state.run_button_text}
               </button>
             </li>
             <li>
