@@ -115,7 +115,7 @@ function searchTweet(e, word) {
   client.get('search/tweets', params, (error, tweets, response) => {
     if(error) throw error;
 
-    // If Tweets is zero
+    // Tweets, No Hit Check.
     if(tweets.statuses[0] === undefined){
       e.sender.send('ScreenName', '');
       e.sender.send('Text', 'No Hit Tweets.');
