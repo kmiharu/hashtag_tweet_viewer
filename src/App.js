@@ -90,7 +90,7 @@ class App extends Component {
       this.setState({ twitterlogocolor: '#00aced' });
       this.setState({ run_button_text: 'Running / 実行中' });
 
-      // interval time分、初回起動時に時間がかかる問題の修正
+      // When first push to run button, wait time. Modified.
       this.setState({ fadeflag: false });
       ipcRenderer.send('Hashtag', this.state.hashtag);
 
