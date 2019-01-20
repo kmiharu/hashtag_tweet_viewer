@@ -4,7 +4,7 @@ import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
 
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
@@ -23,18 +23,27 @@ class App extends Component {
       hashtag: '',
       screen_name: '',
       text: '',
+
       run_button_text: 'To run / 実行する',
+      change_color_mode_button_text: 'Light mode',
+
       max_length: 240,
       interval_time: 5000,
+
       fadeflag: false,
       execflag: false,
+      colorflag: true,
+
       twitterlogocolor: '#666666',
+      card_background_color: '#ffffff',
+      card_text_color: '#000000'
     };
 
     this.handleHashtagChange = this.handleHashtagChange.bind(this);
     this.handleMaxLengthChange = this.handleMaxLengthChange.bind(this);
     this.handleExecCheck = this.handleExecCheck.bind(this);
     this.handleIntervalTime = this.handleIntervalTime.bind(this);
+    this.handleChangeColorMode = this.handleChangeColorMode.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -101,6 +110,26 @@ class App extends Component {
     }
   };
 
+  handleChangeColorMode(event) {
+    if(this.state.colorflag) {
+      // to Dark
+      this.setState({
+        card_background_color: '#141d26',
+        card_text_color: '#ffffff',
+        change_color_mode_button_text: 'Dark mode',
+        colorflag: false
+      });
+    } else {
+      // to light
+      this.setState({
+        card_background_color: '#ffffff',
+        card_text_color: '#000000',
+        change_color_mode_button_text: 'Light mode',
+        colorflag: true
+      });
+    }
+  };
+
   render() {
     // start/stop button classNames
     const run_button_class = ClassNames({
@@ -149,18 +178,29 @@ class App extends Component {
                 current value : {this.state.interval_time} millisecond
               </label>
             </li>
+            <li>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  onClick={this.handleChangeColorMode}
+                />
+              }
+              label={this.state.change_color_mode_button_text}
+            />
+            </li>
           </ul>
         </div>
 
-        <Card className="Card">
+        <Card className="Card" style={{ backgroundColor: this.state.card_background_color }}>
           <CardContent>
-            <Typography variant="h3">
+            <Typography variant="h3" style={{ color: this.state.card_text_color }}>
               <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h4" style={{ color: this.state.card_text_color }}>
               <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" style={{ color: this.state.card_text_color }}>
               <Fade in={ this.state.fadeflag } text={ this.state.text } />
             </Typography>
           </CardContent>
