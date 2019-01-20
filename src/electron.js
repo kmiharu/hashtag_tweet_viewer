@@ -115,12 +115,18 @@ function searchTweet(e, word) {
   client.get('search/tweets', params, (error, tweets, response) => {
     if(error) throw error;
 
-    screen_name = '@' + tweets.statuses[0].user.screen_name;
-    text = tweets.statuses[0].text;
+    // If Tweets is zero
+    if(tweets.statuses[0] === undefined){
+      e.sender.send('ScreenName', '');
+      e.sender.send('Text', 'No Hit Tweets.');
+    } else {
+      screen_name = '@' + tweets.statuses[0].user.screen_name;
+      text = tweets.statuses[0].text;
+      e.sender.send('ScreenName', screen_name);
+      e.sender.send('Text', text);
+    }
 
-    e.sender.send('ScreenName', screen_name);
-    e.sender.send('Text', text);
-
+    
     //delete this.client;
   });
 }
