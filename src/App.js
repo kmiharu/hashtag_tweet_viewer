@@ -27,7 +27,7 @@ class App extends Component {
       run_button_text: 'To run / 実行する',
       change_color_mode_button_text: 'Light mode',
 
-      max_length: 240,
+      max_length: 100,
       interval_time: 5000,
 
       fadeflag: false,
@@ -88,16 +88,20 @@ class App extends Component {
   handleExecCheck(event) {
     // stop
     if(this.state.execflag) {
-      this.setState({ execflag: false });
-      this.setState({ twitterlogocolor: '#666666'});
-      this.setState({ run_button_text: 'To run / 実行する' });
+      this.setState({
+        execflag: false,
+        twitterlogocolor: '#666666',
+        run_button_text: 'To run / 実行する'
+      });
 
       clearInterval(timerNum);
     // start
     } else {
-      this.setState({ execflag: true });
-      this.setState({ twitterlogocolor: '#00aced' });
-      this.setState({ run_button_text: 'Running / 実行中' });
+      this.setState({
+        execflag: true,
+        twitterlogocolor: '#00aced',
+        run_button_text: 'Running / 実行中'
+      });
 
       // When first push to run button, wait time. Modified.
       this.setState({ fadeflag: false });
