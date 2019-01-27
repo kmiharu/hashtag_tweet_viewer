@@ -201,7 +201,7 @@ class App extends Component {
             <Typography variant="h3" style={{ color: this.state.card_text_color }}>
               <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
             </Typography>
-            <Typography variant="h4" style={{ color: this.state.card_text_color }}>
+            <Typography variant="h4" style={{ color: this.state.card_text_color, fontWeight: 'bold' }}>
               <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
             </Typography>
             <Typography variant="h5" style={{ color: this.state.card_text_color }}>
