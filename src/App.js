@@ -139,24 +139,84 @@ class App extends Component {
 
   // flag is Int
   handleRenderView(flag) {
+    // start/stop button classNames
+    const run_button_class = ClassNames({
+      "running-button": this.state.execflag === true,
+      "to-run-button": this.state.execflag === false
+    });
     switch (flag) {
+      // Main View
       case 0:
         return(
-          <Card className="Card" style={{ backgroundColor: this.state.card_background_color }}>
-            <CardContent>
-              <Typography variant="h3" style={{ color: this.state.card_text_color }}>
-                <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
-              </Typography>
-              <Typography variant="h4" style={{ color: this.state.card_text_color, fontWeight: 'bold' }}>
-                <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
-              </Typography>
-              <Typography variant="h5" style={{ color: this.state.card_text_color }}>
-                <Fade in={ this.state.fadeflag } text={ this.state.text } />
-              </Typography>
-            </CardContent>
-          </Card>
-        );        
-    
+          <div>
+            <div>
+              <ul>
+                <li>
+                  <label className="config-label">
+                    Hashtag:
+                  </label>
+                  <input
+                    onChange={this.handleHashtagChange} disabled={this.state.execflag}
+                  />
+                  <button
+                    className={run_button_class}
+                    onClick={this.handleExecCheck}
+                  >
+                    {this.state.run_button_text}
+                  </button>
+                </li>
+                <li>
+                  <label className="config-label">
+                    Max length:
+                  </label>
+                  <input
+                    onChange={this.handleMaxLengthChange} disabled={this.state.execflag}
+                  />
+                  <label>
+                    current value : {this.state.max_length}
+                  </label>
+                </li>
+                <li>
+                  <label className="config-label">
+                    Interval time:
+                  </label>
+                  <input
+                    onChange={this.handleIntervalTime} disabled={this.state.execflag}
+                  />
+                  <label>
+                    current value : {this.state.interval_time} millisecond
+                  </label>
+                </li>
+                <li>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      color="primary"
+                      onClick={this.handleChangeColorMode}
+                    />
+                  }
+                  label={this.state.change_color_mode_button_text}
+                />
+                </li>
+              </ul>
+            </div>
+            <Card className="Card" style={{ backgroundColor: this.state.card_background_color }}>
+              <CardContent>
+                <Typography variant="h3" style={{ color: this.state.card_text_color }}>
+                  <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
+                </Typography>
+                <Typography variant="h4" style={{ color: this.state.card_text_color, fontWeight: 'bold' }}>
+                  <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
+                </Typography>
+                <Typography variant="h5" style={{ color: this.state.card_text_color }}>
+                  <Fade in={ this.state.fadeflag } text={ this.state.text } />
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      // NG word config viwe
       case 1:
         return(
           <Ngwords />
@@ -168,70 +228,10 @@ class App extends Component {
   }
 
   render() {
-    // start/stop button classNames
-    const run_button_class = ClassNames({
-      "running-button": this.state.execflag === true,
-      "to-run-button": this.state.execflag === false
-    });
-
     return(
       <div>
-        {/* Tool view */}
-        <div>
-          <ul>
-            <li>
-              <label className="config-label">
-                Hashtag:
-              </label>
-              <input
-                onChange={this.handleHashtagChange} disabled={this.state.execflag}
-              />
-              <button
-                className={run_button_class}
-                onClick={this.handleExecCheck}
-              >
-                {this.state.run_button_text}
-              </button>
-            </li>
-            <li>
-              <label className="config-label">
-                Max length:
-              </label>
-              <input
-                onChange={this.handleMaxLengthChange} disabled={this.state.execflag}
-              />
-              <label>
-                current value : {this.state.max_length}
-              </label>
-            </li>
-            <li>
-              <label className="config-label">
-                Interval time:
-              </label>
-              <input
-                onChange={this.handleIntervalTime} disabled={this.state.execflag}
-              />
-              <label>
-                current value : {this.state.interval_time} millisecond
-              </label>
-            </li>
-            <li>
-            <FormControlLabel
-              control={
-                <Switch
-                  color="primary"
-                  onClick={this.handleChangeColorMode}
-                />
-              }
-              label={this.state.change_color_mode_button_text}
-            />
-            </li>
-          </ul>
-        </div>
-
         {/* Content view */}
-        { this.handleRenderView(1) }
-
+        { this.handleRenderView(this.state.viewflag) }
       </div>
     );
   }
