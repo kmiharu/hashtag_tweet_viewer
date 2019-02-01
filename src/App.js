@@ -3,8 +3,9 @@ import './App.css';
 import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
+import Ngwords from './components/Ngwords.js';
 
-import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
+import { Button, Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
@@ -33,6 +34,7 @@ class App extends Component {
       fadeflag: false,
       execflag: false,
       colorflag: true,
+      viewflag: 0,
 
       twitterlogocolor: '#666666',
       card_background_color: '#ffffff',
@@ -44,6 +46,7 @@ class App extends Component {
     this.handleExecCheck = this.handleExecCheck.bind(this);
     this.handleIntervalTime = this.handleIntervalTime.bind(this);
     this.handleChangeColorMode = this.handleChangeColorMode.bind(this);
+    this.handleRenderView = this.handleRenderView.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -134,6 +137,36 @@ class App extends Component {
     }
   };
 
+  // flag is Int
+  handleRenderView(flag) {
+    switch (flag) {
+      case 0:
+        return(
+          <Card className="Card" style={{ backgroundColor: this.state.card_background_color }}>
+            <CardContent>
+              <Typography variant="h3" style={{ color: this.state.card_text_color }}>
+                <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
+              </Typography>
+              <Typography variant="h4" style={{ color: this.state.card_text_color, fontWeight: 'bold' }}>
+                <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
+              </Typography>
+              <Typography variant="h5" style={{ color: this.state.card_text_color }}>
+                <Fade in={ this.state.fadeflag } text={ this.state.text } />
+              </Typography>
+            </CardContent>
+          </Card>
+        );        
+    
+      case 1:
+        return(
+          <Ngwords />
+        );
+
+      default:
+        break;
+    }
+  }
+
   render() {
     // start/stop button classNames
     const run_button_class = ClassNames({
@@ -143,7 +176,7 @@ class App extends Component {
 
     return(
       <div>
-        {/* config view */}
+        {/* Tool view */}
         <div>
           <ul>
             <li>
@@ -196,19 +229,9 @@ class App extends Component {
           </ul>
         </div>
 
-        <Card className="Card" style={{ backgroundColor: this.state.card_background_color }}>
-          <CardContent>
-            <Typography variant="h3" style={{ color: this.state.card_text_color }}>
-              <FontAwesomeIcon icon={['fab', 'twitter']} color={this.state.twitterlogocolor}/> &#35;&nbsp;{this.state.hashtag}
-            </Typography>
-            <Typography variant="h4" style={{ color: this.state.card_text_color, fontWeight: 'bold' }}>
-              <Fade in={ this.state.fadeflag } text={ this.state.screen_name } />
-            </Typography>
-            <Typography variant="h5" style={{ color: this.state.card_text_color }}>
-              <Fade in={ this.state.fadeflag } text={ this.state.text } />
-            </Typography>
-          </CardContent>
-        </Card>
+        {/* Content view */}
+        { this.handleRenderView(1) }
+
       </div>
     );
   }
