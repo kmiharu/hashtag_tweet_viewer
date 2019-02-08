@@ -21,7 +21,7 @@ class Ngwords extends Component {
             </TableHead>
             <TableBody>
 
-              {/* TODO: use for loop. */}
+              {/* TODO: variable view */}
               <TableRow>
                 {/* word */}
                 <TableCell></TableCell>
