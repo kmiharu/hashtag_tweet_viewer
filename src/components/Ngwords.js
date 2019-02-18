@@ -11,7 +11,16 @@ const styles = {
 class Ngwords extends Component {
   constructor(props){
     super(props);
+
+    // TODO: load NG words file.
+    // If file not found, Will create new file.
   }
+
+  // TODO: Reload NG words file function.
+  // Use when on/off event.
+
+  // TODO: Delete a NG word function.
+  // Delete a word in NG word file.
 
   render(){
     return(
