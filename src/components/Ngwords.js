@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
+const styles = {
+  paper: {
+    marginLeft: '20px',
+    marginRight: '20px'
+  }
+};
+
 class Ngwords extends Component {
   constructor(props){
     super(props);
@@ -10,7 +17,7 @@ class Ngwords extends Component {
     return(
       <div>
         <h1>NG words.</h1>
-        <Paper>
+        <Paper style={styles.paper}>
           <Table>
             <TableHead>
               <TableRow>
@@ -24,11 +31,11 @@ class Ngwords extends Component {
               {/* TODO: variable view */}
               <TableRow>
                 {/* word */}
-                <TableCell></TableCell>
+                <TableCell>word</TableCell>
                 {/* ON/OFF */}
-                <TableCell></TableCell>
+                <TableCell>on</TableCell>
                 {/* Delete button */}
-                <TableCell></TableCell>
+                <TableCell>del</TableCell>
               </TableRow>
 
             </TableBody>
