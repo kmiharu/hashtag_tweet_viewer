@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import fs from 'fs';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 // When use app module on renderer process, Will use remote.app module.
 const { remote } = window.require('electron');
 
+// back slash or nomal slash.
+// Swap synbols, After OS check.
+let seppath;
+if(remote.process.platform === 'win32'){
+  seppath =  '\\';
+} else {
+  seppath = '/';
+}
+
+// static css
 const styles = {
   paper: {
     marginLeft: '20px',
@@ -16,8 +25,7 @@ class Ngwords extends Component {
   constructor(props){
     super(props);
 
-    console.log(remote.app.getPath('userData'));
-    console.log(remote.process.platform);
+    console.log(remote.app.getPath('userData') + seppath + 'hogefile');
 
     // TODO: load NG words file.
     // If file not found, Will create new file.
@@ -28,9 +36,6 @@ class Ngwords extends Component {
 
   // TODO: Delete a NG word function.
   // Delete a word in NG word file.
-
-  // TODO: back slash or nomal slash
-  // Swap synbols, After OS check.
 
   render(){
     return(
