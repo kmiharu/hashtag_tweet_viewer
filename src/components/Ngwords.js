@@ -6,11 +6,11 @@ const { remote } = window.require('electron');
 
 // back slash or nomal slash.
 // Swap synbols, After OS check.
-let seppath;
+let SEP_PATH;
 if(remote.process.platform === 'win32'){
-  seppath =  '\\';
+  SEP_PATH =  '\\';
 } else {
-  seppath = '/';
+  SEP_PATH = '/';
 }
 
 // static css
@@ -25,7 +25,7 @@ class Ngwords extends Component {
   constructor(props){
     super(props);
 
-    console.log(remote.app.getPath('userData') + seppath + 'hogefile');
+    console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
 
     // TODO: load NG words file.
     // If file not found, Will create new file.
