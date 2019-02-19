@@ -29,8 +29,8 @@ class Ngwords extends Component {
   // TODO: Delete a NG word function.
   // Delete a word in NG word file.
 
-  // TODO: Check process platform.
-  // OS check.
+  // TODO: back slash or nomal slash
+  // Swap synbols, After OS check.
 
   render(){
     return(
