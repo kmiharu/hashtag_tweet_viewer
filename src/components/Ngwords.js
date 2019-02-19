@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import fs from 'fs';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+
+// When use app module on renderer process, Will use remote.app module.
+const { remote } = window.require('electron');
 
 const styles = {
   paper: {
@@ -12,6 +16,9 @@ class Ngwords extends Component {
   constructor(props){
     super(props);
 
+    console.log(remote.app.getPath('userData'));
+    console.log(remote.process.platform);
+
     // TODO: load NG words file.
     // If file not found, Will create new file.
   }
@@ -21,6 +28,9 @@ class Ngwords extends Component {
 
   // TODO: Delete a NG word function.
   // Delete a word in NG word file.
+
+  // TODO: Check process platform.
+  // OS check.
 
   render(){
     return(
