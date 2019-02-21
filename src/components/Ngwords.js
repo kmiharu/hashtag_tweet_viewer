@@ -51,7 +51,8 @@ class Ngwords extends Component {
   // Delete a word in NG word file.
   // Send task to Main process.
   deleteNGword(){
-    ipcRenderer.send('deleteNGword');
+    // second arg: word to delete.
+    ipcRenderer.send('deleteNGword', '');
   };
 
   render(){
