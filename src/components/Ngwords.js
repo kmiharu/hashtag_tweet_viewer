@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 // When use app module on renderer process, Will use remote.app module.
-const { remote } = window.require('electron');
+const { remote, ipcRenderer } = window.require('electron');
 
 // back slash or nomal slash.
 // Swap synbols, After OS check.
@@ -26,6 +26,10 @@ class Ngwords extends Component {
     super(props);
 
     console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
+
+    // TODO:
+    // listen NG words data. from Main process.
+    // use ipcRenderer
 
     // TODO: load NG words file.
     // If file not found, Will create new file.
