@@ -29,13 +29,16 @@ class Ngwords extends Component {
 
     // TODO: load NG words file.
     // If file not found, Will create new file.
+    // Send task to Main process.
   }
 
   // TODO: Reload NG words file function.
   // Use when on/off event.
+  // Send task to Main process.
 
   // TODO: Delete a NG word function.
   // Delete a word in NG word file.
+  // Send task to Main process.
 
   render(){
     return(
