@@ -25,35 +25,9 @@ class Ngwords extends Component {
   constructor(props){
     super(props);
 
-    console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
+    //console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
 
-    // TODO:
-    // listen NG words data. from Main process.
-    // use ipcRenderer
-    ipcRenderer.on('NG_words_data', (arg) => {
-      // edit json object on state.
-    });
-
-    // TODO: load NG words file.
-    // If file not found, Will create new file.
-    // Send task to Main process.
-    ipcRenderer.send('readNGwordsFile');
   }
-
-  // TODO: Reload NG words file function.
-  // Use when on/off event.
-  // Send task to Main process.
-  reloadNGwordsFile(){
-    ipcRenderer.send('reloadNGwordsFile');
-  };
-
-  // TODO: Delete a NG word function.
-  // Delete a word in NG word file.
-  // Send task to Main process.
-  deleteNGword(){
-    // second arg: word to delete.
-    ipcRenderer.send('deleteNGword', '');
-  };
 
   render(){
     return(

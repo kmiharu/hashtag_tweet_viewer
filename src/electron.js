@@ -52,19 +52,6 @@ function createWindow() {
     }
   });
 
-  // TODO:
-  // listen NG words read request, from renderer process.
-  // If not found 'NG_words.json', create file.
-  // If error, return params.
-
-  // TODO:
-  // listen NG words write request, from renderer process.
-  // Not Overwrite, Yes Add.
-  // return comp or error params.
-
-  // TODO:
-  // listen NG words delete request, from renderer process.
-
   // Create Menu
   createMenu();
 
