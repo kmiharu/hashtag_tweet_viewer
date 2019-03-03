@@ -52,6 +52,14 @@ function createWindow() {
     }
   });
 
+  // listen Read/Save NG words request.
+  ipcMain.on('readNGwords', () => {
+    console.log('read NG words request.');
+  });
+  ipcMain.on('saveNGwords', () => {
+    console.log('save NG words request.');
+  });
+
   // Create Menu
   createMenu();
 

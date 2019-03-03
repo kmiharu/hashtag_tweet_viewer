@@ -25,26 +25,31 @@ class Ngwords extends Component {
   constructor(props){
     super(props);
 
+    this.readRequestNGwords = this.readRequestNGwords.bind();
+    this.saveRequestNGwords = this.saveRequestNGwords.bind();
+
     //console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
 
   }
 
   // TODO:
   // NG words, Read request.
-  readRequestNGword(){
-
+  readRequestNGwords(){
+    ipcRenderer.send('readNGwords');
   };
 
   // TODO:
   // NG words, Save request.
-  saveRequestNGword(){
-
+  saveRequestNGwords(){
+    ipcRenderer.send('saveNGwords');
   };
 
   render(){
     return(
       <div>
         <h1>NG words.</h1>
+        <button onClick={this.readRequestNGwords}>read</button>
+        <button onClick={this.saveRequestNGwords}>save</button>
         <Paper style={styles.paper}>
           <Table>
             <TableHead>
