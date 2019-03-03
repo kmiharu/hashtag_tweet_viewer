@@ -29,6 +29,18 @@ class Ngwords extends Component {
 
   }
 
+  // TODO:
+  // NG words, Read request.
+  readRequestNGword(){
+
+  };
+
+  // TODO:
+  // NG words, Save request.
+  saveRequestNGword(){
+
+  };
+
   render(){
     return(
       <div>
