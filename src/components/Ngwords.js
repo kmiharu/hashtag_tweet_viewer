@@ -6,15 +6,6 @@ const { remote, ipcRenderer } = window.require('electron');
 
 let ngwords;
 
-// back slash or nomal slash.
-// Swap synbols, After OS check.
-let SEP_PATH;
-if(remote.process.platform === 'win32'){
-  SEP_PATH =  '\\';
-} else {
-  SEP_PATH = '/';
-}
-
 // static css
 const styles = {
   paper: {
@@ -29,8 +20,6 @@ class Ngwords extends Component {
 
     this.readRequestNGwords = this.readRequestNGwords.bind();
     this.saveRequestNGwords = this.saveRequestNGwords.bind();
-
-    //console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
 
     ipcRenderer.on('dataNGwords', (arg) => {
       ngwords = arg;

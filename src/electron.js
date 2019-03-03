@@ -22,6 +22,15 @@ const twitteroauth = new OauthTwitter({
   secret: CS
 });
 
+// back slash or nomal slash.
+// Swap synbols, After OS check
+let SEP_PATH;
+if(process.platform === 'win32'){
+  SEP_PATH = '\\';
+} else {
+  SEP_PATH = '/';
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -55,6 +64,7 @@ function createWindow() {
   // listen Read/Save NG words request.
   ipcMain.on('readNGwords', () => {
     console.log('read NG words request.');
+    console.log(app.getPath('userData') + SEP_PATH + 'hogefile');
   });
   ipcMain.on('saveNGwords', () => {
     console.log('save NG words request.');
@@ -137,6 +147,23 @@ function searchTweet(e, word) {
     
     //delete this.client;
   });
+}
+
+// TODO:
+// Confirm existence of file function.
+function existFile(path){
+
+}
+// TODO:
+// Read file function.
+function readFile(path){
+
+}
+// TODO:
+// Write file function.
+// No add, Yes Override.
+function writeFile(path){
+
 }
 
 // Disable HardwareAcceleration.
