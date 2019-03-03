@@ -4,6 +4,8 @@ import { Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@materi
 // When use app module on renderer process, Will use remote.app module.
 const { remote, ipcRenderer } = window.require('electron');
 
+let ngwords;
+
 // back slash or nomal slash.
 // Swap synbols, After OS check.
 let SEP_PATH;
@@ -30,6 +32,9 @@ class Ngwords extends Component {
 
     //console.log(remote.app.getPath('userData') + SEP_PATH + 'hogefile');
 
+    ipcRenderer.on('dataNGwords', (arg) => {
+      ngwords = arg;
+    });
   }
 
   // TODO:
