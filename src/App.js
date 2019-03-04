@@ -203,7 +203,7 @@ class App extends Component {
                   label={this.state.change_color_mode_button_text}
                 />
                 {/* If you want to pass arg to method, use the bind function. */}
-                <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button>
+                {/* <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button> */}
                 </li>
               </ul>
             </div>
