@@ -47,7 +47,7 @@ class App extends Component {
     this.handleIntervalTime = this.handleIntervalTime.bind(this);
     this.handleChangeColorMode = this.handleChangeColorMode.bind(this);
     this.handleRenderView = this.handleRenderView.bind(this);
-    this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
+    // this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -138,9 +138,9 @@ class App extends Component {
     }
   };
 
-  handleChangeRenderView(flag) {
-    this.setState({ viewflag: flag });
-  }
+  // handleChangeRenderView(flag) {
+  //   this.setState({ viewflag: flag });
+  // }
 
   // flag is Int
   handleRenderView(flag) {
