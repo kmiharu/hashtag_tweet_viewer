@@ -22,15 +22,6 @@ const twitteroauth = new OauthTwitter({
   secret: CS
 });
 
-// back slash or nomal slash.
-// Swap synbols, After OS check
-let SEP_PATH;
-if(process.platform === 'win32'){
-  SEP_PATH = '\\';
-} else {
-  SEP_PATH = '/';
-}
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -50,7 +41,7 @@ function createWindow() {
   //mainWindow.loadURL('http://localhost:3000');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // listen hashtag text from renderer process.
   ipcMain.on('Hashtag', (event, arg) => {
@@ -59,15 +50,6 @@ function createWindow() {
     } else {
       event.sender.send('Text', 'Hashtag text is none.');
     }
-  });
-
-  // listen Read/Save NG words request.
-  ipcMain.on('readNGwords', () => {
-    console.log('read NG words request.');
-    console.log(app.getPath('userData') + SEP_PATH + 'hogefile');
-  });
-  ipcMain.on('saveNGwords', () => {
-    console.log('save NG words request.');
   });
 
   // Create Menu
@@ -118,7 +100,7 @@ function createMenu() {
 
 // Search Hashtag Tweet
 function searchTweet(e, word) {
-  const client = new Twitter({
+  let client = new Twitter({
     consumer_key: CK,
     consumer_secret: CS,
     access_token_key: ATK,
@@ -147,23 +129,6 @@ function searchTweet(e, word) {
     
     //delete this.client;
   });
-}
-
-// TODO:
-// Confirm existence of file function.
-function existFile(path){
-
-}
-// TODO:
-// Read file function.
-function readFile(path){
-
-}
-// TODO:
-// Write file function.
-// No add, Yes Override.
-function writeFile(path){
-
 }
 
 // Disable HardwareAcceleration.

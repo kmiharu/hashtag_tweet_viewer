@@ -3,9 +3,9 @@ import './App.css';
 import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
-import Ngwords from './components/Ngwords.js';
+//import Ngwords from './components/Ngwords.js';
 
-import { Button, Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
+import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
@@ -225,10 +225,10 @@ class App extends Component {
 
       // NG word config viwe
       case 1:
-        return(
-          <Ngwords />
-        );
-
+        // return(
+        //   <Ngwords />
+        // );
+        break;
       default:
         break;
     }
