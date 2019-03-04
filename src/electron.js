@@ -52,6 +52,11 @@ function createWindow() {
     }
   });
 
+  ipcMain.on('testData', (event, arg) => {
+    console.log(JSON.parse(arg)[0].data);
+  });
+
+
   // Create Menu
   createMenu();
 

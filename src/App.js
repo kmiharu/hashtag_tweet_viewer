@@ -204,6 +204,17 @@ class App extends Component {
                 />
                 {/* If you want to pass arg to method, use the bind function. */}
                 {/* <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button> */}
+
+                <button onClick={() => {
+                  let data = [
+                    { data: 'hoge' },
+                    { data: 'fuga' }
+                  ];
+                  ipcRenderer.send('testData', JSON.stringify(data, null, '  '));
+                }}>
+                  hoge
+                </button>
+
                 </li>
               </ul>
             </div>
