@@ -41,7 +41,7 @@ function createWindow() {
   //mainWindow.loadURL('http://localhost:3000');
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // listen hashtag text from renderer process.
   ipcMain.on('Hashtag', (event, arg) => {
@@ -53,7 +53,7 @@ function createWindow() {
   });
 
   ipcMain.on('testData', (event, arg) => {
-    console.log(JSON.parse(arg)[0].data);
+    console.log(JSON.parse(arg));
   });
 
 

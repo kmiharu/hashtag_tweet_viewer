@@ -3,7 +3,7 @@ import './App.css';
 import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
-//import Ngwords from './components/Ngwords.js';
+import NGword from './components/NGword.js';
 
 import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,7 +47,8 @@ class App extends Component {
     this.handleIntervalTime = this.handleIntervalTime.bind(this);
     this.handleChangeColorMode = this.handleChangeColorMode.bind(this);
     this.handleRenderView = this.handleRenderView.bind(this);
-    // this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
+    //this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
+    //this.handleBackToppage = this.handleBackToppage.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -142,6 +143,10 @@ class App extends Component {
   //   this.setState({ viewflag: flag });
   // }
 
+  // handleBackToppage() {
+  //   this.setState({ viewflag: 0 });
+  // }
+
   // flag is Int
   handleRenderView(flag) {
     // start/stop button classNames
@@ -205,15 +210,12 @@ class App extends Component {
                 {/* If you want to pass arg to method, use the bind function. */}
                 {/* <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button> */}
 
-                <button onClick={() => {
-                  let data = [
-                    { data: 'hoge' },
-                    { data: 'fuga' }
-                  ];
+                {/* <button onClick={() => {
+                  let data = [];
                   ipcRenderer.send('testData', JSON.stringify(data, null, '  '));
                 }}>
                   hoge
-                </button>
+                </button> */}
 
                 </li>
               </ul>
@@ -237,7 +239,7 @@ class App extends Component {
       // NG word config viwe
       case 1:
         // return(
-        //   <Ngwords />
+        //   <NGword backTop={() => {this.handleBackToppage()} }/>
         // );
         break;
       default:
