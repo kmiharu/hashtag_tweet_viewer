@@ -30,7 +30,7 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "win-package": "electron-packager . hashtag_tweet_viewer --platform=win32 --arch=x64 --out=release --overwrite --icon=images/HTV.ico",
-    "mac-package": "electron-packager . hashtag_tweet_viewer --platform=darwin --arch=x64 --out=release --overwrite"
+    "mac-package": "electron-packager . hashtag_tweet_viewer --platform=darwin --arch=x64 --out=release --overwrite --icon=images/HTV.icns"
   },
   "eslintConfig": {
     "extends": "react-app"
