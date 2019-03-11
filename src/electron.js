@@ -1,6 +1,7 @@
 const electron = require('electron');
 const OauthTwitter = require('electron-oauth-twitter');
 const Twitter = require('twitter');
+const fs = require('fs');
 // Module to control application life.
 const app = electron.app;
 const ipcMain = electron.ipcMain;
@@ -21,6 +22,15 @@ const twitteroauth = new OauthTwitter({
   key: CK,
   secret: CS
 });
+
+// back slash or nomal slash.
+// Swap synbols, After OS check
+let SEP_PATH;
+if(process.platform === 'win32'){
+  SEP_PATH = '\\';
+} else {
+  SEP_PATH = '/';
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -52,10 +62,14 @@ function createWindow() {
     }
   });
 
-  ipcMain.on('testData', (event, arg) => {
-    console.log(JSON.parse(arg));
+  // listen Read/Save NG words request.
+  ipcMain.on('readNGwords', () => {
+    console.log('read NG words request.');
+    console.log(app.getPath('userData') + SEP_PATH + 'hogefile');
   });
-
+  ipcMain.on('saveNGwords', () => {
+    console.log('save NG words request.');
+  });
 
   // Create Menu
   createMenu();
@@ -105,7 +119,7 @@ function createMenu() {
 
 // Search Hashtag Tweet
 function searchTweet(e, word) {
-  let client = new Twitter({
+  const client = new Twitter({
     consumer_key: CK,
     consumer_secret: CS,
     access_token_key: ATK,
@@ -134,6 +148,34 @@ function searchTweet(e, word) {
     
     //delete this.client;
   });
+}
+
+// TODO:
+// Confirm existence of file function.
+function existFile(path){
+  let isExist = false;
+
+  // statSync is Don't return false, return error.
+  try {
+    fs.statSync(path);
+    isExist = true;
+  } catch {
+    isExist = false;
+  }
+  return isExist;
+}
+// TODO:
+// Read json file function.
+function readFile(path){
+  if(existFile(path)){
+    return JSON.parse(fs.readFileSync(path, 'utf8'));
+  }
+}
+// TODO:
+// Write file function.
+// No add, Yes Override.
+function writeFile(path){
+
 }
 
 // Disable HardwareAcceleration.

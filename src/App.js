@@ -4,7 +4,7 @@ import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
 
-import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
+import { Button, Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // use electron
@@ -46,8 +46,7 @@ class App extends Component {
     this.handleIntervalTime = this.handleIntervalTime.bind(this);
     this.handleChangeColorMode = this.handleChangeColorMode.bind(this);
     this.handleRenderView = this.handleRenderView.bind(this);
-    //this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
-    //this.handleBackToppage = this.handleBackToppage.bind(this);
+    this.handleChangeRenderView = this.handleChangeRenderView.bind(this);
 
     // render screen name
     ipcRenderer.on('ScreenName', (event, arg) => {
@@ -138,13 +137,9 @@ class App extends Component {
     }
   };
 
-  // handleChangeRenderView(flag) {
-  //   this.setState({ viewflag: flag });
-  // }
-
-  // handleBackToppage() {
-  //   this.setState({ viewflag: 0 });
-  // }
+  handleChangeRenderView(flag) {
+    this.setState({ viewflag: flag });
+  }
 
   // flag is Int
   handleRenderView(flag) {
@@ -207,15 +202,7 @@ class App extends Component {
                   label={this.state.change_color_mode_button_text}
                 />
                 {/* If you want to pass arg to method, use the bind function. */}
-                {/* <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button> */}
-
-                {/* <button onClick={() => {
-                  let data = [];
-                  ipcRenderer.send('testData', JSON.stringify(data, null, '  '));
-                }}>
-                  hoge
-                </button> */}
-
+                <button onClick={this.handleChangeRenderView.bind(this, 1)}>hoge</button>
                 </li>
               </ul>
             </div>
@@ -237,10 +224,10 @@ class App extends Component {
 
       // NG word config viwe
       case 1:
-        // return(
-        //   <NGword backTop={() => {this.handleBackToppage()} }/>
-        // );
-        break;
+        return(
+          <Ngwords />
+        );
+
       default:
         break;
     }
