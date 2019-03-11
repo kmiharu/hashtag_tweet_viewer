@@ -18,6 +18,20 @@ MIT - Please read LICENSE file.
 
 ![use_image](use_image.jpg)
 
+## How to use on MacOS
+Please clone each and build.  
+__"Caution"__ Please installed Node.js
+
+```sh
+# build method
+
+$ git clone https://github.com/hirony-jp/hashtag_tweet_viewer.git
+$ cd hashtag_tweet_viewer
+$ npm install
+$ npm run mac-package
+```
+App is generated in release directory.
+
 ---
 
 ## 目次
@@ -37,6 +51,20 @@ MIT - LICENSE ファイルを読んでください。
 ## 利用イメージ
 
 ![use_image](use_image.jpg)
+
+## MacOSでの使い方
+各々でクローンしてビルドしてください。  
+__"注意"__ Node.jsをインストールしてください。
+
+```sh
+# build方法
+
+$ git clone https://github.com/hirony-jp/hashtag_tweet_viewer.git
+$ cd hashtag_tweet_viewer
+$ npm install
+$ npm run mac-package
+```
+releaseディレクトリの中にアプリケーションが生成されます。
 
 ---
 
