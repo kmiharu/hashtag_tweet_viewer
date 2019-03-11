@@ -3,7 +3,6 @@ import './App.css';
 import ClassNames from 'classnames';
 
 import Fade from './components/Fade.js';
-import NGword from './components/NGword.js';
 
 import { Card, CardContent, Typography, FormControlLabel, Switch } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
