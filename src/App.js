@@ -224,9 +224,10 @@ class App extends Component {
 
       // NG word config viwe
       case 1:
-        return(
-          <Ngwords />
-        );
+        // return(
+        //   <Ngwords />
+        // );
+        break;
 
       default:
         break;
