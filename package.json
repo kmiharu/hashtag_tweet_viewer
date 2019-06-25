@@ -1,49 +1,36 @@
 {
   "name": "hashtag_tweet_viewer",
-  "version": "0.2.1",
+  "version": "0.1.0",
   "private": true,
-  "main": "src/electron.js",
-  "author": "Hirony",
-  "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.12",
-    "@fortawesome/free-brands-svg-icons": "^5.6.3",
-    "@fortawesome/free-solid-svg-icons": "^5.6.3",
-    "@fortawesome/react-fontawesome": "^0.1.3",
-    "@material-ui/core": "^3.8.1",
-    "classnames": "^2.2.6",
-    "electron-json-storage": "^4.1.6",
-    "electron-oauth-twitter": "^1.2.0",
-    "fs": "0.0.1-security",
-    "path": "^0.12.7",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "^2.1.5",
-    "react-transition-group": "^2.5.2",
-    "twitter": "^1.7.1"
+    "@types/jest": "24.0.15",
+    "@types/node": "12.0.10",
+    "@types/react": "16.8.22",
+    "@types/react-dom": "16.8.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "typescript": "3.5.2"
   },
-  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "win-package": "electron-packager . hashtag_tweet_viewer --platform=win32 --arch=x64 --out=release --overwrite --icon=images/HTV.ico",
-    "mac-package": "electron-packager . hashtag_tweet_viewer --platform=darwin --arch=x64 --out=release --overwrite --icon=images/HTV.icns"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "devtron": "^1.4.0",
-    "electron": "^4.0.0",
-    "electron-packager": "^13.0.1"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
