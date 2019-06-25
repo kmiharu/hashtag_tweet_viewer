@@ -21,6 +21,9 @@ const createWindow = () => {
   });
 };
 
+// Disable HardwareAcceleration.
+app.disableHardwareAcceleration();
+
 app.on('ready', () => {
   createWindow();
 });
