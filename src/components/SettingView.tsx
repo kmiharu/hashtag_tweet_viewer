@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, TextField } from '@material-ui/core';
-import Ul from './Ul';
-import CustomButton from './CustomButton';
+import CustomUl from './style/CustomUl';
+import CustomButton from './style/CustomButton';
 
 const SettingView: React.FC = () => {
   return (
     <>
-      <Ul>
+      <CustomUl>
         <li>
           <TextField label="Hashtag" type="text" variant="filled" />
         </li>
@@ -34,7 +34,7 @@ const SettingView: React.FC = () => {
             Run
           </CustomButton>
         </li>
-      </Ul>
+      </CustomUl>
     </>
   );
 };
