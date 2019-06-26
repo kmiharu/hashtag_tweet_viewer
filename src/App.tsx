@@ -1,11 +1,12 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SettingView from './components/SettingView';
+import TweetView from './components/TweetView';
 
 const App: React.FC = () => {
   return (
     <div>
-      <p>Hello HTV</p>
-      <FontAwesomeIcon icon={['fab', 'twitter']} />
+      <SettingView />
+      <TweetView />
     </div>
   );
 };
