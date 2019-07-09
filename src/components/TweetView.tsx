@@ -12,7 +12,17 @@ const TweetView: React.FC = () => {
             <FontAwesomeIcon icon={['fab', 'twitter']} /> &#35;&nbsp;hirony_live
           </Typography>
           <Typography variant="h4">@_hirony</Typography>
-          <Typography variant="h5">Hello World #hirony_live</Typography>
+          <Typography variant="h5">
+            Hello World Hello World Hello World Hello World Hello World Hello
+            World Hello World Hello World Hello World Hello World Hello World
+            Hello World Hello World Hello World Hello World Hello World Hello
+            World Hello World Hello World Hello World Hello World Hello World
+            Hello World Hello World Hello World Hello World Hello World Hello
+            World Hello World Hello World Hello World Hello World Hello World
+            Hello World Hello World Hello World Hello World Hello World Hello
+            World Hello World Hello World Hello World Hello World Hello World
+            Hello World #hirony_live
+          </Typography>
         </CardContent>
       </CustomCard>
     </>
