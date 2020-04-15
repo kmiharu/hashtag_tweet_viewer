@@ -22,6 +22,9 @@ function createWindow() {
 //   });
 //   mainWindow.loadURL(startUrl);
 
+  // delete menu bar(Windows)
+  mainWindow.setMenu(null);
+
   mainWindow.loadURL('http://localhost:3000');
 
   // Open the DevTools.
