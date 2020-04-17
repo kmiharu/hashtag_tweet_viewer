@@ -47,6 +47,10 @@ app.disableHardwareAcceleration();
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+// 今後削除される予定なのでdocに従いdefaultでfalseを設定する。
+// https://www.electronjs.org/docs/all
+app.allowRendererProcessReuse = false;
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
     // On OS X it is common for applications and their menu bar
