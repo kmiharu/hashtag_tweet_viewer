@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) =>
 )
 
 function TweetView() {
+    // [ state name, function name ]
+    const [ hashtag, setHashtag ] = useState("Hashtag");
+    const [ username, setUsername ] = useState("UserID")
+    const [ tweets, setTweets ] = useState("Run Now !!");
     const classes = useStyles();
 
     return (
@@ -28,13 +33,13 @@ function TweetView() {
             <Card className={classes.cardStyle}>
                 <CardContent>
                     <Typography variant="h3">
-                        # hashtag
+                       <FAIcon icon={['fab', 'twitter']} /> #{hashtag}
                     </Typography>
                     <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                        @userID
+                        @{username}
                     </Typography>
                     <Typography variant="h5" className={classes.tweetView}>
-                        やばないそれ？？さっきのほうがええやで。生みの親にキモイって言われるさーなくんかわいそうｋｋｋｋｋｋｋｋｋｋｋｋｋｋｋｋｋああ
+                        {tweets}
                     </Typography>
                 </CardContent>
             </Card>
