@@ -22,9 +22,10 @@ function SettingView() {
     const [ runButtonText, setRunButtonText ] = useState("RUN");
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
     const [ colorModeFlag, setColorModeFlag ] = useState(true);
+    const [ colorModeText, setColorModeText ] = useState("White Mode");
 
-    const handleChangeRunButton = () => {
-        if(runButtonFlag) {
+    const handleRunButtonMethod = () => {
+        if (runButtonFlag) {
             setRunButtonText("STOP");
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
@@ -33,10 +34,16 @@ function SettingView() {
             setRunButtonColor("primary");
             setRunButtonFlag(true);
         }
-    }
+    };
     const handleChangeColorMode = () => {
-        colorModeFlag ? setColorModeFlag(false) : setColorModeFlag(true);
-    }
+        if (colorModeFlag) {
+            setColorModeFlag(false);
+            setColorModeText("Dark Mode");
+        } else {
+            setColorModeFlag(true);
+            setColorModeText("White Mode");
+        }
+    };
 
     return (
         <div>
@@ -49,10 +56,10 @@ function SettingView() {
                 <Button className={classes.buttonStyle}
                         variant="contained"
                         color={runButtonColor}
-                        onClick={handleChangeRunButton}>
+                        onClick={handleRunButtonMethod}>
                     {runButtonText}
                 </Button>
-                <Switch color="primary" onChange={handleChangeColorMode} />{colorModeFlag ? "White Mode" : "Dark Mode"}
+                <Switch color="primary" onChange={handleChangeColorMode} />{colorModeText}
             </div>
         </div>
     );
