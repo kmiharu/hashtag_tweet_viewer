@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
 
-import { hoge } from '../App.js';
+import { hoge, fuga } from '../App.js';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -27,6 +27,7 @@ function SettingView() {
     const [ colorModeText, setColorModeText ] = useState("White Mode");
 
     const [h, setH] = useContext(hoge);
+    const [f, setF] = useContext(fuga);
 
     const handleRunButtonMethod = () => {
         if (runButtonFlag) {
@@ -34,13 +35,15 @@ function SettingView() {
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
 
-            setH(h + 1)
+            setH(h + 1);
+            setF(f + 10);
         } else {
             setRunButtonText("RUN");
             setRunButtonColor("primary");
             setRunButtonFlag(true);
 
-            setH(h + 1)
+            setH(h + 1);
+            setF(f + 10);
         }
     };
     const handleChangeColorMode = () => {
@@ -69,8 +72,10 @@ function SettingView() {
                 </Button>
                 <Switch color="primary" onChange={handleChangeColorMode} />{colorModeText}
 
-                {h}
+                
             </div>
+
+            {h} {f}
         </div>
     );
 }
