@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
+
+import { hoge } from '../App.js';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -28,6 +30,8 @@ function TweetView() {
     const [ username, setUsername ] = useState("UserID")
     const [ tweets, setTweets ] = useState("Run Now !!");
 
+    const [h, setH] = useContext(hoge);
+
     return (
         <div>
             <Card className={classes.cardStyle}>
@@ -36,7 +40,7 @@ function TweetView() {
                        <FAIcon icon={['fab', 'twitter']} /> #{hashtag}
                     </Typography>
                     <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                        @{username}
+                        @{username} {h}
                     </Typography>
                     <Typography variant="h5" className={classes.tweetView}>
                         {tweets}
