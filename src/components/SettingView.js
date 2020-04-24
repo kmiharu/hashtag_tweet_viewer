@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
-
-import { hoge, fuga } from '../App.js';
+import { colorModeContext } from '../App.js';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -23,27 +22,18 @@ function SettingView() {
     const [ runButtonFlag, setRunButtonFlag ] = useState(true);
     const [ runButtonText, setRunButtonText ] = useState("RUN");
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
-    const [ colorModeFlag, setColorModeFlag ] = useState(true);
+    const [ colorModeFlag, setColorModeFlag ] = useContext(colorModeContext);
     const [ colorModeText, setColorModeText ] = useState("White Mode");
-
-    const [h, setH] = useContext(hoge);
-    const [f, setF] = useContext(fuga);
 
     const handleRunButtonMethod = () => {
         if (runButtonFlag) {
             setRunButtonText("STOP");
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
-
-            setH(h + 1);
-            setF(f + 10);
         } else {
             setRunButtonText("RUN");
             setRunButtonColor("primary");
             setRunButtonFlag(true);
-
-            setH(h + 1);
-            setF(f + 10);
         }
     };
     const handleChangeColorMode = () => {
@@ -77,12 +67,8 @@ function SettingView() {
                         onClick={handleRunButtonMethod}>
                     {runButtonText}
                 </Button>
-                <Switch color="primary" onChange={handleChangeColorMode} />{colorModeText}
-
-                
+                <Switch color="primary" onChange={handleChangeColorMode} />{colorModeText}                
             </div>
-
-            {h} {f}
         </div>
     );
 }

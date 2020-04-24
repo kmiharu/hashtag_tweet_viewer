@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import SettingView from './components/SettingView';
 import TweetView from './components/TweetView';
 
-export const hoge = React.createContext();
-export const fuga = React.createContext();
+export const colorModeContext = createContext();
 
 function App() {
 
-    const [ h, setH ] = React.useState(100);
-    const [ f, setF ] = React.useState(300);
+    const [ colorModeFlag, setColorModeFlag ] = useState(true);
 
     return (
         <div>
-            <hoge.Provider value={[h, setH]}>
-            <fuga.Provider value={[f, setF]}>
+            <colorModeContext.Provider value={[ colorModeFlag, setColorModeFlag ]}>
                 <h1>Hashtag Tweet Viewer</h1>
                 <SettingView />
                 <TweetView />
-            </fuga.Provider>
-            </hoge.Provider>
+            </colorModeContext.Provider>
         </div>
     );
 }
