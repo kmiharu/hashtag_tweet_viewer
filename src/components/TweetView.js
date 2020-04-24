@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) =>
 function TweetView() {
     const classes = useStyles();
 
-    const [ hashtag, setHashtag ] = useState("Hashtag");
-    const [ username, setUsername ] = useState("UserID")
-    const [ tweets, setTweets ] = useState("Run Now !!");
+    const [ hashtag ] = useState("Hashtag");
+    const [ username ] = useState("UserID")
+    const [ tweets ] = useState("Run Now !!");
 
-    const [h, setH] = useContext(hoge);
-    const [f, setF] = useContext(fuga);
+    const [h] = useContext(hoge);
+    const [f] = useContext(fuga);
 
     return (
         <div>
