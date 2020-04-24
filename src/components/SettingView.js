@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
-import { colorModeContext } from '../App.js';
+import { colorModeContext, runButtonContext } from '../App.js';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
 function SettingView() {
     const classes = useStyles();
 
-    const [ runButtonFlag, setRunButtonFlag ] = useState(true);
+    const [ runButtonFlag, setRunButtonFlag ] = useContext(runButtonContext);
     const [ runButtonText, setRunButtonText ] = useState("RUN");
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
     const [ colorModeFlag, setColorModeFlag ] = useContext(colorModeContext);
