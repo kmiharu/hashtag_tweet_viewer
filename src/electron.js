@@ -1,10 +1,6 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const CK = 'EbONJcOqssFttqWt4qA12jn5s';
-const CS = '7mV3ukOVWjskrme9LgPCuV53G4oA3w0P7xkDOHYvnarADoSuRc';
-let ATK = '';
-let ATS = '';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
