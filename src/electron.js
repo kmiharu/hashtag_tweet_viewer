@@ -1,6 +1,12 @@
 const electron = require('electron');
+const OauthTwitter = require('electron-oauth-twitter');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+
+const tw = new OauthTwitter({
+  key: 'EbONJcOqssFttqWt4qA12jn5s',
+  secret: '7mV3ukOVWjskrme9LgPCuV53G4oA3w0P7xkDOHYvnarADoSuRc'
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -13,7 +19,20 @@ function createWindow() {
   // delete menu bar(Windows)
   mainWindow.setMenu(null);
 
-  mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
+  // mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
+  mainWindow.loadURL('http://localhost:3000');
+
+  // if not login -> create login window.
+  if(mainWindow.webContents.executeJavaScript('localStorage.getItem("ACCESS_TOKEN")') === "") {
+    tw.startRequest().then(function(result) {
+      const accessToken = result.oauth_access_token;
+      const accessTokenSecret = result.oauth_access_token_secret;
+      mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN", "' + accessToken + '");', true);
+      mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN_SECRET", "' + accessTokenSecret + '");', true);
+    }).catch(function(error) {
+      console.error(error, error.stack);
+    });
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

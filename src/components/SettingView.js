@@ -49,13 +49,6 @@ function SettingView() {
     return (
         <div>
             <div>
-                <Button className={classes.buttonStyle}
-                        variant="contained"
-                        color="primary">
-                    Please Twitter Login
-                </Button>
-            </div>
-            <div>
                 <TextField className={classes.textFieldStyle} label="Hashtag" variant="outlined" />
                 <TextField className={classes.textFieldStyle} label="Max Length" variant="outlined" />
                 <TextField className={classes.textFieldStyle} label="Interval Time" variant="outlined" />
