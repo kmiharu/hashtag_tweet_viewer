@@ -22,9 +22,10 @@ const client = new Twitter({
   access_token_secret: accessTokenSecret
 });
 
+// TODO: AT, ATS の保存の仕方を検討
 twitterOauth.startRequest().then(function(result) {
-  const accessToken = result.oauth_access_token;
-  const accessTokenSecret = result.oauth_access_token_secret;
+  accessToken = result.oauth_access_token;
+  accessTokenSecret = result.oauth_access_token_secret;
   mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN", "' + accessToken + '");', true);
   mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN_SECRET", "' + accessTokenSecret + '");', true);
 }).catch((error) => {

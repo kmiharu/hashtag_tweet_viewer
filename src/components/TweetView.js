@@ -43,6 +43,7 @@ function TweetView() {
         setUsername(args);
     });
     ipcRenderer.on('TWEETS', (event, args) => {
+        // TODO: max length に収まるよう成型
         setTweets(args);
     });
 

@@ -29,6 +29,7 @@ function SettingView() {
     const [ colorModeFlag, setColorModeFlag ] = useContext(colorModeContext);
     const [ colorModeText, setColorModeText ] = useState("White Mode");
 
+    // TODO: interval time を使って繰り返し取得するようにする
     const handleRunButtonMethod = () => {
         if (runButtonFlag) {
             setRunButtonText("STOP");
