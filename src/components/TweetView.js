@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
-import { colorModeContext } from '../App.js';
+import { colorModeContext, hashtagContext } from '../App.js';
 const { ipcRenderer } = window.require('electron');
 
 const useStyles = makeStyles((theme) =>
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) =>
 function TweetView() {
     const classes = useStyles();
 
-    const [ hashtag, setHashtag ] = useState("Hashtag");
+    const [ hashtag ] = useContext(hashtagContext);
     const [ username, setUsername ] = useState("UserID")
     const [ tweets, setTweets ] = useState("Run Now !!");
     const [ colorModeFlag ] = useContext(colorModeContext);

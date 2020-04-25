@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
-import { colorModeContext, runButtonContext } from '../App.js';
+import { colorModeContext, runButtonContext, hashtagContext } from '../App.js';
 const { ipcRenderer } = window.require('electron');
 
 const useStyles = makeStyles((theme) =>
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) =>
 function SettingView() {
     const classes = useStyles();
 
-    const [ hashtag, setHashtag ] = useState();
+    const [ hashtag, setHashtag ] = useContext(hashtagContext);
     const [ maxLength, setMaxLength ] = useState();
     const [ intervalTime, setIntervalTime ] = useState();
     const [ runButtonFlag, setRunButtonFlag ] = useContext(runButtonContext);
@@ -62,7 +62,6 @@ function SettingView() {
 
     return (
         <div>
-            {hashtag}
             <div>
                 <TextField
                     className={classes.textFieldStyle}
