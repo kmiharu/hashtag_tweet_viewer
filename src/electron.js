@@ -1,77 +1,74 @@
 const electron = require('electron');
 const OauthTwitter = require('electron-oauth-twitter');
-const app = electron.app;
+const Twitter = require('twitter');
+const { app, ipcMain } = electron;
 const BrowserWindow = electron.BrowserWindow;
 
-const tw = new OauthTwitter({
-  key: 'oJXc4X0uSmHOZT5UKQsy7OTaX',
-  secret: 'BNnEv0rVzcY2who2v7JuF3x0zKPWE485GYjaounn81OOTnMxaw'
-});
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+const consumerKey = 'oJXc4X0uSmHOZT5UKQsy7OTaX';
+const consumerSecret = 'BNnEv0rVzcY2who2v7JuF3x0zKPWE485GYjaounn81OOTnMxaw';
+let accessToken = "";
+let accessTokenSecret = "";
 let mainWindow;
 
+const twitterOauth = new OauthTwitter({
+  key: consumerKey,
+  secret: consumerSecret
+});
+
+const client = new Twitter({
+  consumer_key: consumerKey,
+  consumer_secret: consumerSecret,
+  access_token_key: accessToken,
+  access_token_secret: accessTokenSecret
+});
+
+twitterOauth.startRequest().then(function(result) {
+  const accessToken = result.oauth_access_token;
+  const accessTokenSecret = result.oauth_access_token_secret;
+  mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN", "' + accessToken + '");', true);
+  mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN_SECRET", "' + accessTokenSecret + '");', true);
+}).catch((error) => {
+  console.error(error, error.stack);
+});
+
 function createWindow() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
 
-  // delete menu bar(Windows)
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
   mainWindow.setMenu(null);
-
-  mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
-  // mainWindow.loadURL('http://localhost:3000');
-  mainWindow.webContents.openDevTools();
-
-  // if not login -> create login window.
-  // if(mainWindow.webContents.executeJavaScript('localStorage.getItem("ACCESS_TOKEN")') === "") {
-    tw.startRequest().then(function(result) {
-      const accessToken = result.oauth_access_token;
-      const accessTokenSecret = result.oauth_access_token_secret;
-      mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN", "' + accessToken + '");', true);
-      mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN_SECRET", "' + accessTokenSecret + '");', true);
-    }).catch(function(error) {
-      console.error(error, error.stack);
-    });
-  // }
-
-  // Emitted when the window is closed.
+  //mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
+  mainWindow.loadURL('http://localhost:3000');
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null
   })
-}
+};
 
-// Disable HardwareAcceleration.
 app.disableHardwareAcceleration();
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
-
-// 今後削除される予定なのでdocに従いdefaultでfalseを設定する。
-// https://www.electronjs.org/docs/all
 app.allowRendererProcessReuse = false;
-
-// Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit()
     }
 });
-
 app.on('activate', function () {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipcMain.on('SEARCH', (event, args) => {
+  client.get('search/tweets', { q: args, count: 10 }, (error, data, response) => {
+    if( data.statuses[0] === undefined ) {
+      event.sender.send('TWEETS', 'No hit.');
+    } else {
+      event.sender.send('TWEETS', data.statuses[0].text);
+      event.sender.send('SCREEN_NAME', data.statuses[0].user.screen_name);
+    }
+  });
+});

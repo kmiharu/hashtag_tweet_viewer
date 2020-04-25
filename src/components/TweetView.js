@@ -3,6 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { colorModeContext } from '../App.js';
+const { ipcRenderer } = window.require('electron');
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -33,10 +34,17 @@ const useStyles = makeStyles((theme) =>
 function TweetView() {
     const classes = useStyles();
 
-    const [ hashtag ] = useState("Hashtag");
-    const [ username ] = useState("UserID")
-    const [ tweets ] = useState("Run Now !!");
+    const [ hashtag, setHashtag ] = useState("Hashtag");
+    const [ username, setUsername ] = useState("UserID")
+    const [ tweets, setTweets ] = useState("Run Now !!");
     const [ colorModeFlag ] = useContext(colorModeContext);
+
+    ipcRenderer.on('SCREEN_NAME', (event, args) => {
+        setUsername(args);
+    });
+    ipcRenderer.on('TWEETS', (event, args) => {
+        setTweets(args);
+    });
 
     return (
         <div>
