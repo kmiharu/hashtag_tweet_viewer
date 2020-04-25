@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
-import { colorModeContext, runButtonContext, hashtagContext } from '../App.js';
+import { colorModeContext, runButtonContext, hashtagContext, maxLengthContext, intervalTimeContext } from '../App.js';
 const { ipcRenderer } = window.require('electron');
 
 const useStyles = makeStyles((theme) =>
@@ -21,8 +21,8 @@ function SettingView() {
     const classes = useStyles();
 
     const [ hashtag, setHashtag ] = useContext(hashtagContext);
-    const [ maxLength, setMaxLength ] = useState();
-    const [ intervalTime, setIntervalTime ] = useState();
+    const [ maxLength, setMaxLength ] = useContext(maxLengthContext);
+    const [ intervalTime, setIntervalTime ] = useContext(intervalTimeContext);
     const [ runButtonFlag, setRunButtonFlag ] = useContext(runButtonContext);
     const [ runButtonText, setRunButtonText ] = useState("RUN");
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
@@ -34,7 +34,7 @@ function SettingView() {
             setRunButtonText("STOP");
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
-            ipcRenderer.send('SEARCH', '#信たまてぇてぇ');
+            ipcRenderer.send('SEARCH', '#' + hashtag);
         } else {
             setRunButtonText("RUN");
             setRunButtonColor("primary");
@@ -72,11 +72,13 @@ function SettingView() {
                     className={classes.textFieldStyle}
                     label="Max Length"
                     variant="outlined"
+                    defaultValue={maxLength}
                     onChange={handleChangeMaxLength} />
                 <TextField
                     className={classes.textFieldStyle}
                     label="Interval Time"
                     variant="outlined"
+                    defaultValue={intervalTime}
                     onChange={handleChangeIntervalTime} />
             </div>
             <div>

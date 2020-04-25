@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme) =>
 function TweetView() {
     const classes = useStyles();
 
+    const [ colorModeFlag ] = useContext(colorModeContext);
     const [ hashtag ] = useContext(hashtagContext);
     const [ username, setUsername ] = useState("UserID")
     const [ tweets, setTweets ] = useState("Run Now !!");
-    const [ colorModeFlag ] = useContext(colorModeContext);
 
     ipcRenderer.on('SCREEN_NAME', (event, args) => {
         setUsername(args);
