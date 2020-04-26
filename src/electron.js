@@ -41,6 +41,20 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+
+  ipcMain.on('SEARCH', (event, args) => {
+    client.get('search/tweets', { q: args, count: 10 }, (error, data, response) => {
+      if(error) throw error;
+
+      if( data.statuses[0] === undefined ) {
+        event.sender.send('TWEETS', 'No hit.');
+      } else {
+        event.sender.send('TWEETS', data.statuses[0].text);
+        event.sender.send('SCREEN_NAME', data.statuses[0].user.screen_name);
+      }
+    });
+  });
+
   mainWindow.setMenu(null);
   //mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
   mainWindow.loadURL('http://localhost:3000');
@@ -61,15 +75,4 @@ app.on('activate', function () {
     if (mainWindow === null) {
         createWindow()
     }
-});
-
-ipcMain.on('SEARCH', (event, args) => {
-  client.get('search/tweets', { q: args, count: 10 }, (error, data, response) => {
-    if( data.statuses[0] === undefined ) {
-      event.sender.send('TWEETS', 'No hit.');
-    } else {
-      event.sender.send('TWEETS', data.statuses[0].text);
-      event.sender.send('SCREEN_NAME', data.statuses[0].user.screen_name);
-    }
-  });
 });

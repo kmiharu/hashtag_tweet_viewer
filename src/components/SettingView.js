@@ -1,8 +1,17 @@
 import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles} from '@material-ui/core/styles';
 import { TextField, Button, Switch } from '@material-ui/core';
-import { colorModeContext, runButtonContext, hashtagContext, maxLengthContext, intervalTimeContext } from '../App.js';
+import {
+    colorModeContext,
+    runButtonContext,
+    hashtagContext,
+    maxLengthContext,
+    intervalTimeContext,
+    fadeAnimeContext
+} from '../App.js';
 const { ipcRenderer } = window.require('electron');
+
+let timerId;
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -28,6 +37,7 @@ function SettingView() {
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
     const [ colorModeFlag, setColorModeFlag ] = useContext(colorModeContext);
     const [ colorModeText, setColorModeText ] = useState("White Mode");
+    const [ fadeAnimeFlag, setFadeAnimeFlag ] = useContext(fadeAnimeContext);
 
     // TODO: interval time を使って繰り返し取得するようにする
     const handleRunButtonMethod = () => {
@@ -35,8 +45,12 @@ function SettingView() {
             setRunButtonText("STOP");
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
-            ipcRenderer.send('SEARCH', '#' + hashtag);
+            timerId = setInterval(() => {
+                setFadeAnimeFlag(false);
+                ipcRenderer.send('SEARCH', '#' + hashtag);
+            }, intervalTime);
         } else {
+            clearInterval(timerId);
             setRunButtonText("RUN");
             setRunButtonColor("primary");
             setRunButtonFlag(true);
