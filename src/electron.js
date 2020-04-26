@@ -65,8 +65,8 @@ function createWindow() {
   });
 
   mainWindow.setMenu(null);
-  //mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
+  //mainWindow.loadURL('http://localhost:3000');
   mainWindow.on('closed', function () {
     mainWindow = null
   })
