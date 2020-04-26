@@ -84,6 +84,13 @@ function SettingView() {
         }
     }
 
+    ipcRenderer.on('STOP_SEARCH', (event, args) => {
+        clearInterval(timerId);
+        setRunButtonText("RUN");
+        setRunButtonColor("primary");
+        setRunButtonFlag(true);
+    });
+
     return (
         <div>
             <div>
