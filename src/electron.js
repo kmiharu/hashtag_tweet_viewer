@@ -9,7 +9,7 @@ const store = new Store();
 const consumerKey = 'oJXc4X0uSmHOZT5UKQsy7OTaX';
 const consumerSecret = 'BNnEv0rVzcY2who2v7JuF3x0zKPWE485GYjaounn81OOTnMxaw';
 const twitterOauth = new OauthTwitter({ key: consumerKey, secret: consumerSecret });
-let accessToken = '';
+let accessToken = store.get('ACCESS_TOKEN');
 let accessTokenSecret = store.get('ACCESS_TOKEN_SECRET');
 let mainWindow;
 let client;
