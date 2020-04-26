@@ -19,7 +19,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: { nodeIntegration: true }
+    webPreferences: { nodeIntegration: true },
+    title: 'Hashtag Tweet Viewer'
   });
   
   if( accessToken === accessTokenSecret ){
@@ -47,6 +48,7 @@ function createWindow() {
     });
 
     // TODO: error dialog の変更
+    // TODO: ログインしてないときの誘導処理
     client.get('search/tweets', params, (error, data, response) => {
       // if(error) throw error;
       if(error) {
@@ -78,8 +80,8 @@ function createWindow() {
   });
 
   mainWindow.setMenu(null);
-  //mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
-  mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
+  // mainWindow.loadURL('http://localhost:3000');
   mainWindow.on('closed', function () {
     mainWindow = null
   })
