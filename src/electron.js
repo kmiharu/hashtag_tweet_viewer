@@ -1,36 +1,12 @@
 const electron = require('electron');
 const OauthTwitter = require('electron-oauth-twitter');
 const Twitter = require('twitter');
+const Store = require('electron-store');
 const { app, ipcMain } = electron;
 const BrowserWindow = electron.BrowserWindow;
 
-const consumerKey = 'oJXc4X0uSmHOZT5UKQsy7OTaX';
-const consumerSecret = 'BNnEv0rVzcY2who2v7JuF3x0zKPWE485GYjaounn81OOTnMxaw';
-let accessToken = "";
-let accessTokenSecret = "";
+const store = new Store();
 let mainWindow;
-
-const twitterOauth = new OauthTwitter({
-  key: consumerKey,
-  secret: consumerSecret
-});
-
-const client = new Twitter({
-  consumer_key: consumerKey,
-  consumer_secret: consumerSecret,
-  access_token_key: accessToken,
-  access_token_secret: accessTokenSecret
-});
-
-// TODO: AT, ATS の保存の仕方を検討
-twitterOauth.startRequest().then(function(result) {
-  accessToken = result.oauth_access_token;
-  accessTokenSecret = result.oauth_access_token_secret;
-  mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN", "' + accessToken + '");', true);
-  mainWindow.webContents.executeJavaScript('localStorage.setItem("ACCESS_TOKEN_SECRET", "' + accessTokenSecret + '");', true);
-}).catch((error) => {
-  console.error(error, error.stack);
-});
 
 function createWindow() {
 
@@ -42,8 +18,41 @@ function createWindow() {
     }
   });
 
+  const consumerKey = 'oJXc4X0uSmHOZT5UKQsy7OTaX';
+  const consumerSecret = 'BNnEv0rVzcY2who2v7JuF3x0zKPWE485GYjaounn81OOTnMxaw';
+  const accessToken = store.get('ACCESS_TOKEN');
+  const accessTokenSecret = store.get('ACCESS_TOKEN_SECRET');
+
+  const twitterOauth = new OauthTwitter({
+    key: consumerKey,
+    secret: consumerSecret
+  });
+  
+  const client = new Twitter({
+    consumer_key: consumerKey,
+    consumer_secret: consumerSecret,
+    access_token_key: accessToken,
+    access_token_secret: accessTokenSecret
+  });
+
+  console.log(accessToken);
+  console.log(accessTokenSecret);
+  
+  if( accessToken === accessTokenSecret ){
+    twitterOauth.startRequest().then(function(result) {
+      store.set('ACCESS_TOKEN', result.oauth_access_token);
+      store.set('ACCESS_TOKEN_SECRET', result.oauth_access_token_secret);
+    }).catch((error) => {
+      console.error(error, error.stack);
+    });
+  };
+
   ipcMain.on('SEARCH', (event, args) => {
-    client.get('search/tweets', { q: args, count: 10 }, (error, data, response) => {
+    const params = {
+      q: '#' + args + '-RT',
+      count: 10
+    }
+    client.get('search/tweets', params, (error, data, response) => {
       if(error) throw error;
 
       if( data.statuses[0] === undefined ) {

@@ -37,17 +37,18 @@ function SettingView() {
     const [ runButtonColor, setRunButtonColor ] = useState("primary");
     const [ colorModeFlag, setColorModeFlag ] = useContext(colorModeContext);
     const [ colorModeText, setColorModeText ] = useState("White Mode");
+    // eslint-disable-next-line no-unused-vars
     const [ fadeAnimeFlag, setFadeAnimeFlag ] = useContext(fadeAnimeContext);
 
-    // TODO: interval time を使って繰り返し取得するようにする
     const handleRunButtonMethod = () => {
         if (runButtonFlag) {
             setRunButtonText("STOP");
             setRunButtonColor("secondary");
             setRunButtonFlag(false);
+            ipcRenderer.send('SEARCH', hashtag);
             timerId = setInterval(() => {
                 setFadeAnimeFlag(false);
-                ipcRenderer.send('SEARCH', '#' + hashtag);
+                ipcRenderer.send('SEARCH', hashtag);
             }, intervalTime);
         } else {
             clearInterval(timerId);
@@ -69,10 +70,18 @@ function SettingView() {
         setHashtag(event.target.value);
     };
     const handleChangeMaxLength = (event) => {
-        setMaxLength(event.target.value);
+        if(event.target.value.match(/^[0-9\b]+$/)){
+            setMaxLength(event.target.value);
+        } else {
+            setMaxLength(240);
+        }
     };
     const handleChangeIntervalTime = (event) => {
-        setIntervalTime(event.target.value);
+        if(event.target.value.match(/^[0-9\b]+$/)){
+            setIntervalTime(event.target.value);
+        } else {
+            setIntervalTime(10000);
+        }
     }
 
     return (
@@ -82,19 +91,22 @@ function SettingView() {
                     className={classes.textFieldStyle}
                     label="Hashtag"
                     variant="outlined"
-                    onChange={handleChangeHashtag} />
+                    onChange={handleChangeHashtag}
+                    disabled={!runButtonFlag} />
                 <TextField
                     className={classes.textFieldStyle}
                     label="Max Length"
                     variant="outlined"
                     defaultValue={maxLength}
-                    onChange={handleChangeMaxLength} />
+                    onChange={handleChangeMaxLength}
+                    disabled={!runButtonFlag} />
                 <TextField
                     className={classes.textFieldStyle}
                     label="Interval Time"
                     variant="outlined"
                     defaultValue={intervalTime}
-                    onChange={handleChangeIntervalTime} />
+                    onChange={handleChangeIntervalTime}
+                    disabled={!runButtonFlag} />
             </div>
             <div>
                 <Button className={classes.buttonStyle}
