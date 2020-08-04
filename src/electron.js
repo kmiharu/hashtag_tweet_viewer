@@ -14,6 +14,12 @@ let accessTokenSecret = store.get('ACCESS_TOKEN_SECRET');
 let mainWindow;
 let client;
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; 
+};
+
 function createWindow() {
 
   mainWindow = new BrowserWindow({
@@ -39,6 +45,7 @@ function createWindow() {
       q: '#' + args + ' -RT',
       count: 10
     };
+    const randomNumber = getRandomInt(0, params.count);
 
     client = new Twitter({
       consumer_key: consumerKey,
@@ -69,12 +76,12 @@ function createWindow() {
         });
       };
 
-      if( data.statuses[0] === undefined ) {
+      if( data.statuses[randomNumber] === undefined ) {
         event.sender.send('TWEETS', 'No hit.');
         event.sender.send('SCREEN_NAME', '');
       } else {
-        event.sender.send('TWEETS', data.statuses[0].text);
-        event.sender.send('SCREEN_NAME', data.statuses[0].user.screen_name);
+        event.sender.send('TWEETS', data.statuses[randomNumber].text);
+        event.sender.send('SCREEN_NAME', data.statuses[randomNumber].user.screen_name);
       }
     });
   });
@@ -82,6 +89,7 @@ function createWindow() {
   mainWindow.setMenu(null);
   mainWindow.loadURL('https://musing-booth-a199e7.netlify.app/');
   // mainWindow.loadURL('http://localhost:3000');
+  // mainWindow.openDevTools();
   mainWindow.on('closed', function () {
     mainWindow = null
   })
