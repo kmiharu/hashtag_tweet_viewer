@@ -29,8 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron src/electron.js",
-    "win-package": "electron-packager . hashtag_tweet_viewer --platform=win32 --arch=x64 --out=release --overwrite --icon=images/HTV.ico",
-    "mac-package": "electron-packager . hashtag_tweet_viewer --platform=darwin --arch=x64 --out=release --overwrite --icon=images/HTV.icns"
+    "win-package": "electron-packager . hashtag_tweet_viewer --platform=win32 --arch=x64 --out=release --overwrite --icon=images/HTV.ico --electron-version=8.2.4",
+    "mac-package": "electron-packager . hashtag_tweet_viewer --platform=darwin --arch=x64 --out=release --overwrite --icon=images/HTV.icns --electron-version=8.2.4"
   },
   "eslintConfig": {
     "extends": "react-app"
