@@ -19,7 +19,7 @@
     "electron-store": "^5.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-transition-group": "^4.3.0",
     "twitter": "^1.7.1"
   },
